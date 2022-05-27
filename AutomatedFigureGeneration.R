@@ -111,7 +111,7 @@ coordsG$group <- as.character(paste("Genus"," (AUC=", round(as.numeric(plotROCli
 
 ########
 # Aves & Diptera
-plotROClistID <- list(Species=roc(amphSp$outcome, amphSp$familyConf, ci=TRUE, auc=TRUE))
+# plotROClistID <- list(Species=roc(amphSp$outcome, amphSp$familyConf, ci=TRUE, auc=TRUE))
 
 #########
 
@@ -130,7 +130,7 @@ coordsAllID <- rbind(coordsF, coordsG, coordsS)
 # coordsAllID <- rbind(coordsG, coordsS) 
 
 # Using plotROC
-# Actinopterygii
+# ROC curves for IDTAXA
 gpROC_ID <- ggplot() + 
   geom_line(data = coordsAllID, aes(`fpr`, `tpr`,  col=`threshold`), size = 1.3, alpha = 1) +
   scale_color_gradientn(name = paste("Confidence", "Threshold", sep="\n"), colours = pal) +
@@ -176,7 +176,7 @@ perfMCCID <- rbind(perfMCCIDf, perfMCCIDg, perfMCCIDs)
 # perfMCCID <- rbind(perfMCCIDg, perfMCCIDs)
 
 #########
-# Actinopterygii
+# MCC curves for IDTAXA
 idtaxaPlotMCC1 <- ggplot(data = perfMCCID, aes(`Confidence Cutoff`,`MCC Score`, col=`Taxonomic Rank`)) +
   geom_line(aes(linetype=`Taxonomic Rank`), size = 1.1, alpha = 1) +
   scale_linetype_manual(values = lines) +
@@ -252,12 +252,12 @@ coordsAllB <- rbind(coordsF, coordsG, coordsS)
 # Bees
 # coordsAllB <- rbind(coordsG, coordsS) 
 
-# Plotting of ROC curve for BLAST - Fish
+# Plotting of ROC curve for BLAST 
 gpROC_B <- ggplot() + 
   geom_line(data = coordsAllB, aes(`fpr`, `tpr`,  col=`threshold`), size = 1.3, alpha = 1) +
   scale_color_gradientn(name = paste("Confidence", "Threshold", sep="\n"), colours = pal) +
   xlab("False Positive Rate") +
-  ggtitle("BLAST") +
+  ggtitle("TOPBLASTHIT") +
   theme(text = element_text(size=16),
         axis.title.y = element_blank(),
         legend.position = "none") +
@@ -297,11 +297,11 @@ perfMCCIDB <- rbind(perfMCCIDfB, perfMCCIDgB, perfMCCIDsB)
 # perfMCCIDB <- rbind(perfMCCIDgB, perfMCCIDsB)
 ########
 
-# Actinopterygii
+# MCC curves for TOPBLASTHIT
 blastPlotMCC1 <- ggplot(data = perfMCCIDB, aes(`Confidence Cutoff`,`MCC Score`, col=`Taxonomic Rank`)) +
   geom_line(aes(linetype=`Taxonomic Rank`), size = 1.1, alpha = 1) +
   scale_linetype_manual(values = lines) +
-  ggtitle("BLAST") +
+  ggtitle("TOPBLASTHIT") +
   labs(x = "Confidence Threshold") +
   ylim(0, 1.01) +
   scale_color_locuszoom() +
@@ -377,7 +377,7 @@ coordsAllR <- rbind(coordsF, coordsG, coordsS)
 
 #######
 
-# Actinopterygii
+# ROC curves for RDP
 gpROC_RDP <- ggplot() + 
   geom_line(data = coordsAllR, aes(`fpr`, `tpr`,  col=`threshold`), size = 1.3, alpha = 1) +
   scale_color_gradientn(name = paste("Confidence", "Threshold", sep="\n"), colours = pal) +
@@ -428,7 +428,7 @@ perfMCCIDsR$`Taxonomic Rank` <- "Species"
 
 perfMCCIDR <- rbind(perfMCCIDfR, perfMCCIDgR, perfMCCIDsR)
 
-# Actinopterygii
+# MCC curves for RDP
 RDPPlotMCC1 <- ggplot(data = perfMCCIDR, aes(`Confidence Cutoff`,`MCC Score`, col=`Taxonomic Rank`)) +
   geom_line(aes(linetype=`Taxonomic Rank`), size = 1.1, alpha = 1) +
   scale_linetype_manual(values = lines) +
